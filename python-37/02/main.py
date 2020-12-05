@@ -38,6 +38,7 @@ def part_2(lines):
             raise e
     return count
 
+
 if __name__ == '__main__':
     path = argv[1] if len(argv) > 1 else 'input.txt'
     data = open(path, 'r').readlines()
