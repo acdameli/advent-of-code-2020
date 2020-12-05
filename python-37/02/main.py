@@ -41,7 +41,7 @@ def part_2(lines):
 
 if __name__ == '__main__':
     path = argv[1] if len(argv) > 1 else 'input.txt'
-    data = open(path, 'r').readlines()
+    data = open(path, 'r').read().splitlines()
     try:
         part_1 = part_1(data)
     except Exception as e:

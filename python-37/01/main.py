@@ -33,8 +33,8 @@ def part_2(data: str):
 
 
 if __name__ == '__main__':
-    path = argv[1] if 1 in argv else 'input.txt'
-    data = [int(l) for l in open(path, 'r').readlines()]
+    path = argv[1] if len(argv) > 1 else 'input.txt'
+    data = [int(l) for l in open(path, 'r').read().splitlines()]
     try:
         part_1 = part_1(data)
     except Exception as e:
