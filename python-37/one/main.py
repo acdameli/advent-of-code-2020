@@ -1,4 +1,5 @@
 from sys import argv
+from library import Solution as Base, SolutionPart
 
 
 def find_2(lines, target=2020):
@@ -30,6 +31,21 @@ def part_1(data: str):
 def part_2(data: str):
     triplet = find_3(data)
     return triplet[0] * triplet[1] * triplet[2]
+
+
+class Part1(SolutionPart):
+    def run(self, data:list):
+        a, b = find_2([int(d) for d in data])
+        return a * b
+
+class Part2(SolutionPart):
+    def run(self, data:list):
+        a, b, c = find_3([int(d) for d in data])
+        return a * b * c
+
+
+class Solution(Base):
+    parts = {1: Part1(), 2: Part2()}
 
 
 if __name__ == '__main__':
