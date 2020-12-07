@@ -1,5 +1,7 @@
 from sys import argv
 
+from library import Solution as Base, SolutionPart
+
 
 def parse_line(line):
     parts = line.split(' ')
@@ -37,6 +39,20 @@ def part_2(lines):
             print(_min, _max, char, pw)
             raise e
     return count
+
+
+class Part1(SolutionPart):
+    def run(self, data:list):
+        return part_1(data)
+
+
+class Part2(SolutionPart):
+    def run(self, data:list):
+        return part_2(data)
+
+
+class Solution(Base):
+    parts = {1: Part1(), 2: Part2()}
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 from sys import argv
+
 from library import Solution as Base, SolutionPart
 
 

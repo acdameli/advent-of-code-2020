@@ -1,5 +1,7 @@
 from sys import argv
 
+from library import Solution as Base, SolutionPart
+
 
 def count_hits(lines, dy, dx):
     x, y = 0, 0
@@ -22,6 +24,21 @@ def part_2(lines):
     for dy, dx in tests:
         result *= count_hits(lines, dy, dx)
     return result
+
+
+class Part1(SolutionPart):
+    def run(self, data:list):
+        return part_1(data)
+
+
+class Part2(SolutionPart):
+    def run(self, data:list):
+        return part_2(data)
+
+
+class Solution(Base):
+    parts = {1: Part1(), 2: Part2()}
+
 
 if __name__ == '__main__':
     path = argv[1] if len(argv) > 1 else 'input.txt'
