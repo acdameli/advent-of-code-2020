@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from library import Solution as Base, SolutionPart
 
 
@@ -25,6 +27,8 @@ class BasePart(SolutionPart):
         }
 
     def run(self, data:list):
+        d = {}
+        count = 0
         for i in range(0, len(data)):
             if data[i] == '':
                 if (
@@ -40,18 +44,26 @@ class BasePart(SolutionPart):
                 continue
             for pair in data[i].split(' '):
                 d[pair.split(':')[0]] = pair.split(':')[1]
+        if (
+            all([k in d for k in self.validators.keys()])
+            and all([
+                self.validate(f, v)
+                for f, v in d.items()
+                if f in self.validators.keys()
+            ])
+        ):
+            count += 1
         return count
 
 
-class Part1(SolutionPart):
+class Part1(BasePart):
     def validate(self, field, value):
         return field in self.validators or field == 'cid'
 
 
-class Part2(SolutionPart):
+class Part2(BasePart):
     def validate(self, field, value):
         return self.validators[field](value)
-
 
 
 class Solution(Base):
