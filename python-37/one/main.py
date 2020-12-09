@@ -3,6 +3,10 @@ from sys import argv
 from library import Solution as Base, SolutionPart
 
 
+class NotFoundException(Exception):
+    pass
+
+
 def find_2(lines, target=2020):
     d = {}
     for l in lines:
@@ -11,7 +15,7 @@ def find_2(lines, target=2020):
             return d[v], v
         else:
             d[target - v] = v
-    raise Exception(f'No pair found sums to {target}')
+    raise NotFoundException(f'No pair found sums to {target}')
 
 
 def find_3(lines, target=2020):
@@ -21,7 +25,7 @@ def find_3(lines, target=2020):
             for k in range(j + 1, l):
                 if lines[i] + lines[j] + lines[k] == target:
                     return lines[i], lines[j], lines[k]
-    raise Exception(f'No triplet found sums to {target}')
+    raise NotFoundException(f'No triplet found sums to {target}')
 
 
 def part_1(data: str):
