@@ -106,7 +106,6 @@ class Part2(Base):
     def run(self, data:list) -> int:
         rules, tickets = self.load(data)
         valid_tickets = list(filter(lambda t: self.is_valid_ticket(t, rules)[0], tickets))
-        print(valid_tickets)
         # determine labels
         #  iterate over every rule and find positions for valid tickets that apply to this rule
         #  using set arithmetic find the unique combination of rule => index that fits
@@ -130,7 +129,6 @@ class Part2(Base):
                     if r1 == r:
                         continue
                     rule_positions[r1] = rule_positions[r1].difference(rule_positions[r])
-        print(rule_positions)
 
         # now we should have a single index for each rule, we have our ticket mapping rule:index for every rule, we can perform our final calculation
         # isolate my_tickets "Departure" label values

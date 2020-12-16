@@ -41,5 +41,10 @@ class SolutionEngine(object):
     @lru_cache()
     def solution_class(self):
         module = import_module(f'{self.day_to_str(self.day)}.main')
-        return module.Solution
+        try:
+            return module.Solution
+        except AttributeError:
+            class DefaultSolution(Solution):
+                parts = {1: module.Part1(), 2: module.Part2()}
+            return DefaultSolution
 

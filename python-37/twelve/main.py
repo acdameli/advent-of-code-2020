@@ -35,6 +35,66 @@ def re_sign_amount(direction, amount):
     ]
 
 
+class Point(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return f'({self.x}, {self.y})'
+
+    def move(self, x, y):
+        return self.__class__(self.x + x, self.y + y)
+
+
+class Direction(object):
+    def __init__(self, direction):
+        self.direction = direction
+
+    def __str__(self):
+        d = {NORTH:'^', EAST:'>', SOUTH:'v', WEST:'<'}
+        return f'{d[self.direction]}'
+
+    def __hash__(self):
+        return self.direction
+
+    def __eq__(self, other):
+        return self.direction == other.direction
+
+    def rotate_clockwise(self, amount):
+        clockwise = [NORTH, EAST, SOUTH, WEST]
+        return self._rotate(clockwise, amount)
+
+    def rotate_counter(self, amount):
+        counter = [WEST, SOUTH, EAST, NORTH]
+        return self._rotate(counter, amount)
+
+    def _rotate(self, dir_list, amount):
+        ticks = (amount // 90)
+        ind = dir_list.index(self.direction)
+        return self.__class__(dir_list[(ind + ticks) % len(dirlist)])
+
+
+class Pointing(object):
+    def __init__(self, point:Point, direction:Direction):
+        self.position = point
+        self.direction = direction
+
+    def __str__(self):
+        return f'{self.position} {self.direction}'
+
+    def move(self, direction, amount):
+        m = mult[direction]
+        point = self.point.move(amount * m[0], amount * m[1])
+        return self.__class__(point, self.direction)
+
+    def rotate(self, direction, amount):
+        if direction == LEFT:
+            amount = (360 - amount) % 360
+        new_direction = self.direction.rotate(amount)
+        return self.__class__(self.point, new_direction)
+
+
 class Ship(object):
     def __init__(self, position:list=[0,0], direction=EAST):
         self.position = position

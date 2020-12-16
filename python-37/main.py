@@ -21,6 +21,7 @@ def main(day, in_file, part):
         except Exception as e:
             print(f' Part {p} failed: {str(e)}')
             failed = True
+            raise e
     return not failed
 
 

@@ -55,8 +55,7 @@ class Part2(SolutionPart):
         for b in busses:
             bound *= b.id if b.id != 'x' else 1
         solution = None
-        print(f'upper bound: {bound}')
-        for i in range(100000000000000, bound):
+        for i in range(100000000000000, bound, int(b)):
             fail = False
             for b in busses:
                 if (int(b) - (i % int(b))) % int(b) != b.index:
